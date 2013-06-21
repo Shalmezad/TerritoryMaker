@@ -17,6 +17,7 @@ class territoryMap
     private:
         int tMap[GRIDWIDTH][GRIDHEIGHT];
         int numTerritories;
+        void createSeeds();
 };
 
 #endif // TERRITORYMAP_H

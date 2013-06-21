@@ -16,8 +16,28 @@ territoryMap::territoryMap()
             tMap[i][j] = 0;
         }
     }
+    //Pick the number of territories.
+    numTerritories = (rand() % (MAXTERRITORIES-MINTERRITORIES)) + MINTERRITORIES;
+
+    //1. Create a random amount of positions and use them to make some territories
+    createSeeds();
 }
 
+void territoryMap::createSeeds()
+{
+    for(int i=1; i<=numTerritories; i++){
+        int xPos,yPos;
+        //pick a random not-taken position
+        do{
+            //pick a random xPos;
+            xPos = rand() % GRIDWIDTH;
+            //pick a random yPos;
+            yPos = rand() % GRIDHEIGHT;
+        }while(tMap[xPos][yPos] != 0);
+        //make it the seed for this territory.
+        tMap[xPos][yPos] = i;
+    }
+}
 
 void territoryMap::printMap()
 {
