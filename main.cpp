@@ -1,10 +1,12 @@
 #include <iostream>
+#include "include/territoryMap.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    territoryMap tM;
+    tM.printMap();
     return 0;
 
 
