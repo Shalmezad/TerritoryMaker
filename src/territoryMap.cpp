@@ -21,6 +21,7 @@ territoryMap::territoryMap()
 
     //1. Create a random amount of positions and use them to make some territories
     createSeeds();
+    branchTerritories();
 }
 
 void territoryMap::createSeeds()
@@ -38,6 +39,70 @@ void territoryMap::createSeeds()
         tMap[xPos][yPos] = i;
     }
 }
+
+void territoryMap::branchTerritories()
+{
+    //Alright, so we need to "grow" territories.
+    //let's cycle through. A lot.
+    int growthLimit = (rand() % (MAXGROWTH-MINGROWTH)) + MINGROWTH;
+    while(growthLimit > 0){
+        //pick a spot.
+        int xPos = rand() % GRIDWIDTH;
+        int yPos = rand() % GRIDHEIGHT;
+
+        //Can we grow it?
+        int neighbor = nearbyTerritories(xPos, yPos);
+        if(neighbor != 0){
+            //success! Grow!
+            tMap[xPos][yPos] = neighbor;
+            // subtract from growth limit
+            growthLimit--;
+        }
+    }
+}
+
+bool territoryMap::isLegal(int x, int y)
+{
+    if(x < 0 || x >= GRIDWIDTH){
+        return false;
+    }
+    if(y < 0 || y >= GRIDHEIGHT){
+        return false;
+    }
+    return true;
+}
+
+int territoryMap::nearbyTerritories(int xPos, int yPos)
+{
+    //try up?
+    if(isLegal(xPos, yPos-1)){
+        if(tMap[xPos][yPos-1] != 0){
+            return tMap[xPos][yPos-1];
+        }
+    }
+    //try down?
+    if(isLegal(xPos, yPos+1)){
+        if(tMap[xPos][yPos+1] != 0){
+            return tMap[xPos][yPos+1];
+        }
+    }
+    //try left?
+    if(isLegal(xPos-1, yPos)){
+        if(tMap[xPos-1][yPos] != 0){
+            return tMap[xPos-1][yPos];
+        }
+    }
+    //try right?
+    if(isLegal(xPos+1, yPos)){
+        if(tMap[xPos+1][yPos] != 0){
+            return tMap[xPos+1][yPos];
+        }
+    }
+
+
+    return 0;
+}
+
 
 void territoryMap::printMap()
 {
