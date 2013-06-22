@@ -18,6 +18,7 @@ class territoryMap
     protected:
     private:
         int tMap[GRIDWIDTH][GRIDHEIGHT];
+
         int numTerritories;
         void createSeeds();
         void branchTerritories();

@@ -70,12 +70,14 @@ void territoryMap::branchTerritories()
         int yPos = rand() % GRIDHEIGHT;
 
         //Can we grow it?
-        int neighbor = nearbyTerritories(xPos, yPos);
-        if(neighbor != 0){
-            //success! Grow!
-            tMap[xPos][yPos] = neighbor;
-            // subtract from growth limit
-            growthLimit--;
+        if(tMap[xPos][yPos] == 0){
+            int neighbor = nearbyTerritories(xPos, yPos);
+            if(neighbor != 0){
+                //success! Grow!
+                tMap[xPos][yPos] = neighbor;
+                // subtract from growth limit
+                growthLimit--;
+            }
         }
     }
 }
