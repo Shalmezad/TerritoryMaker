@@ -22,6 +22,25 @@ territoryMap::territoryMap()
     //1. Create a random amount of positions and use them to make some territories
     createSeeds();
     branchTerritories();
+    fillGaps();
+}
+
+void territoryMap::fillGaps(){
+    //go through each square.
+    for(int i=0; i<GRIDWIDTH; i++){
+        for(int j=0; j<GRIDHEIGHT; j++){
+            //should we worry about this square?
+            if(tMap[i][j] == 0){
+                //get the number of neighbors
+                int neighbors = getNeighbors(i,j);
+                //do we have too many for being a blank square?
+                if(neighbors >= 3){
+                    //fill
+                    tMap[i][j] = nearbyTerritories(i,j);
+                }
+            }
+        }
+    }
 }
 
 void territoryMap::createSeeds()
@@ -70,6 +89,35 @@ bool territoryMap::isLegal(int x, int y)
         return false;
     }
     return true;
+}
+
+int territoryMap::getNeighbors(int xPos, int yPos){
+    int neighbors = 0;
+    //up?
+    if(isLegal(xPos,yPos-1)){
+        if(tMap[xPos][yPos-1] != 0){
+            neighbors++;
+        }
+    }
+    //try down?
+    if(isLegal(xPos, yPos+1)){
+        if(tMap[xPos][yPos+1] != 0){
+            neighbors++;
+        }
+    }
+    //try left?
+    if(isLegal(xPos-1, yPos)){
+        if(tMap[xPos-1][yPos] != 0){
+            neighbors++;
+        }
+    }
+    //try right?
+    if(isLegal(xPos+1, yPos)){
+        if(tMap[xPos+1][yPos] != 0){
+            neighbors++;
+        }
+    }
+    return neighbors;
 }
 
 int territoryMap::nearbyTerritories(int xPos, int yPos)
