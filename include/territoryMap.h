@@ -5,16 +5,17 @@
 const int GRIDWIDTH = 75;
 const int GRIDHEIGHT = 50;
 const int GRIDSIZE = GRIDHEIGHT * GRIDWIDTH;
-const int MAXTERRITORIES = 8;
-const int MINTERRITORIES = 5;
-const int MINGROWTH = GRIDSIZE * .75;
-const int MAXGROWTH = GRIDSIZE * .90;
+const int MAXTERRITORIES = 7;
+const int MINTERRITORIES = 4;
+const int MINGROWTH = GRIDSIZE * .50;
+const int MAXGROWTH = GRIDSIZE * .80;
 
 class territoryMap
 {
     public:
         territoryMap();
         void printMap();
+        void printFancyMap();
     protected:
     private:
         int tMap[GRIDWIDTH][GRIDHEIGHT];

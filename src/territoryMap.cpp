@@ -163,3 +163,45 @@ void territoryMap::printMap()
         cout<<endl;
     }
 }
+
+
+void territoryMap::printFancyMap()
+{
+    for(int j=0; j<GRIDHEIGHT;j++){
+        for(int i=0; i<GRIDWIDTH; i++){
+            switch(tMap[i][j]){
+            case 0:
+                cout<<" ";
+                break;
+            case 1:
+                cout<<"*";
+                break;
+            case 2:
+                cout<<"+";
+                break;
+            case 3:
+                cout<<"o";
+                break;
+            case 4:
+                cout<<"#";
+                break;
+            case 5:
+                cout<<"@";
+                break;
+            case 6:
+                cout<<"e";
+                break;
+            case 7:
+                cout<<"}";
+                break;
+            case 8:
+                cout<<"{";
+                break;
+            default:
+                cout<<" ";
+                break;
+            }
+        }
+        cout<<endl;
+    }
+}

@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     territoryMap tM;
-    tM.printMap();
+    tM.printFancyMap();
     return 0;
 
 
